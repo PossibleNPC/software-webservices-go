@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+option go_package = "./bank";
+
+service Bank {
+  rpc transferMoneyFromTo (TransferMoneyFromToRequest) returns (TransferMoneyFromToResponse) {}
+  rpc createUserWithBalance (CreateUserWithBalanceRequest) returns (CreateUserWithBalanceResponse) {}
+  rpc removeUserByBankAccountNumber (RemoveUserByBankAccountNumberRequest) returns (RemoveUserByBankAccountNumberResponse) {}
+  rpc findUserByBankAccountNumber (FindUserByBankAccountNumberRequest) returns (FindUserByBankAccountNumberResponse) {}
+}
+
+message TransferMoneyFromToRequest {
+  string from = 1;
+  string to = 2;
+  float amount = 3;
+}
+
+message TransferMoneyFromToResponse {
+  string status = 1;
+}
+
+message CreateUserWithBalanceRequest {
+  string firstName = 1;
+  string lastName = 2;
+  string socialSecurityNumber = 3;
+  float balance = 4;
+}
+
+message CreateUserWithBalanceResponse {
+  string bankAccountNumber = 1;
+}
+
+message RemoveUserByBankAccountNumberRequest {
+  string bankAccountNumber = 1;
+}
+
+message RemoveUserByBankAccountNumberResponse {
+  string status = 1;
+}
+
+message FindUserByBankAccountNumberRequest {
+  string bankAccountNumber = 1;
+}
+
+// TODO: We might take out the social security number from the response
+message FindUserByBankAccountNumberResponse {
+    string firstName = 1;
+    string lastName = 2;
+    string socialSecurityNumber = 3;
+    string bankAccountNumber = 4;
+    float balance = 5;
+}
