@@ -49,7 +49,7 @@ func theUserIsCreated(ctx context.Context) (context.Context, error) {
 func hasABalanceOf(ctx context.Context, arg1 int) error {
 	user, ok := ctx.Value(bankUserCtxKey{}).(*User)
 	if !ok {
-		return errors.New("there is no banke user available")
+		return errors.New("there is no bank user available")
 	}
 	if user.GetBalance() != float64(arg1) {
 		return fmt.Errorf("expected %.2f, got %.2f", float64(arg1), user.GetBalance())
@@ -133,7 +133,7 @@ func anotherUserWithABalanceOf(ctx context.Context, arg1 int) (context.Context, 
 
 func theFirstUserTransfersToTheSecondUser(ctx context.Context, arg1 int) (context.Context, error) {
 	// TODO: split these into variables to easily communicate intent to the reader
-	err := bankService.transferMoneyFromTo(ctx.Value("bankAccount").(string), ctx.Value("bankAccount2").(string), float64(arg1))
+	err := bankService.transferMoney(ctx.Value("bankAccount").(string), ctx.Value("bankAccount2").(string), float64(arg1))
 	if err != nil {
 		return nil, fmt.Errorf("expected transfer to be successful, but it was not. %s", err.Error())
 	}
